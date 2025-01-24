@@ -21,6 +21,11 @@ jobs:
           - gcc-15
           - gcc-14
           - gcc-14
+    permissions:
+      id-token: write
+      attestations: write
+      contents: read
+      packages: write
     uses: cynkra/docker-images/.github/workflows/publish.yml@main
     with:
       image: ${{ matrix.image }}

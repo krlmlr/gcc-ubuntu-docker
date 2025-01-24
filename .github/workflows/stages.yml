@@ -18,45 +18,9 @@ jobs:
     strategy:
       matrix:
         image:
-          - r-4-duckdb
-          # - r-debug # forked from wch/r-debug, not yet ready
-          - r-minimal
-          - rchk-igraph
-          # - rig-centos7 # EOL
-          - rig-debian
-          - rig-rocky8
-          - rig-ubuntu
-          - rig-ubuntu24
-          - rigraph-san
-          - tofutf
-    uses: cynkra/docker-images/.github/workflows/publish.yml@main
-    with:
-      image: ${{ matrix.image }}
-
-  stage-2:
-    needs: stage-1
-    strategy:
-      matrix:
-        image:
-          - r-postgres
-          - dm
-          - rig-ubuntu-dbi
-          - rig-ubuntu-duckdb
-          - rig-ubuntu-duckdb4
-          - rig-ubuntu-igraph
-          - rig-ubuntu-revdepcheck
-          - rig-ubuntu24-gcc14
-    uses: cynkra/docker-images/.github/workflows/publish.yml@main
-    with:
-      image: ${{ matrix.image }}
-
-  stage-3:
-    needs: stage-2
-    strategy:
-      matrix:
-        image:
-          - rig-ubuntu-duckdb-dev
-          - rig-ubuntu24-gcc14-duckdb
+          - gcc-15
+          - gcc-14
+          - gcc-14
     uses: cynkra/docker-images/.github/workflows/publish.yml@main
     with:
       image: ${{ matrix.image }}

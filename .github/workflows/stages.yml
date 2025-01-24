@@ -20,7 +20,7 @@ jobs:
         image:
           - gcc-15
           - gcc-14
-          - gcc-14
+          - gcc-13
     permissions:
       id-token: write
       attestations: write

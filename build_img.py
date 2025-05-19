@@ -22,7 +22,7 @@ versions = [
     # Jammy
     "12", "13", 
     # Noble
-    "14", "15",
+    "14", "15", "16"
     ]
 
 test_versions = {}
@@ -35,17 +35,6 @@ class Image(object):
     @property
     def image(self):
         return f"{self.repo}:{self.tag}"
-
-def update_base_images():
-    if not options.no_update_base:
-        # subprocess.check_call("docker pull ubuntu:precise", shell=True)
-        #subprocess.check_call("docker pull ubuntu:trusty", shell=True)
-        subprocess.check_call("docker pull ubuntu:xenial", shell=True)
-        subprocess.check_call("docker pull ubuntu:bionic", shell=True)
-        subprocess.check_call("docker pull ubuntu:focal", shell=True)
-        subprocess.check_call("docker pull ubuntu:jammy", shell=True)
-        subprocess.check_call("docker pull ubuntu:noble", shell=True)
-
 
 def run_my_cmd(cmd):
     try:
@@ -61,7 +50,7 @@ def build(version):
     if options.no_force:
         force = ""
 
-    cmd = f"docker build {force} --tag {image.image} gcc-{version}"
+    cmd = f"docker build --pull {force} --tag {image.image} gcc-{version}"
     run_my_cmd(cmd)
     return image
 
@@ -243,8 +232,6 @@ def run():
     if options.version:
         global versions
         versions = options.version
-
-    update_base_images()
 
     all()
 
